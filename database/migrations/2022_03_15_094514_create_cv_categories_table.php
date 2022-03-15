@@ -8,18 +8,15 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('cv_educations', function (Blueprint $table) {
+        Schema::create('cv_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('qualification', 240)->unique();
-            $table->string('institude', 240);
-            $table->string('location', 240);
-            $table->string('date_period', 240);
+            $table->string('title', 240)->unique();
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('cv_educations');
+        Schema::dropIfExists('cv_categories');
     }
 };

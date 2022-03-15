@@ -16,5 +16,7 @@ use App\Http\Controllers;
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/addJob', [Controllers\CV_jobsController::class, 'create'])->name('cv.addJob');
-Route::post('/addJob', [Controllers\CV_jobsController::class, 'store']);
+Route::get('/cv', [Controllers\CvEntryController::class, 'index'])->name('cv');
+
+Route::get('/cvAdd', [Controllers\CvEntryController::class, 'create'])->name('cvAdd');
+Route::post('/cvAdd', [Controllers\CvEntryController::class, 'store']);
