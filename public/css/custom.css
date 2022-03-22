@@ -1,13 +1,11 @@
 html {
-    overflow-y:scroll;
+    overflow-y:scroll;    
 }
 
 body {
     padding-top: 54px;
-}
-
-h1 {
-    text-align:right;
+    background-image: url("/images/background.png");
+    background-repeat: repeat;
 }
 
 .card {

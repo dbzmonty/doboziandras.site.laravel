@@ -16,7 +16,16 @@ use App\Http\Controllers;
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/cv', [Controllers\CvEntryController::class, 'index'])->name('cv');
+Route::get('/portfolio', [Controllers\PostController::class, 'index'])->name('portfolio');
 
+Route::get('/publish', [Controllers\PostController::class, 'create'])->name('postCreate');
+Route::post('/publish', [Controllers\PostController::class, 'store']);
+
+Route::get('/post/{post}', [Controllers\PostController::class, 'show'])->name('postDetails');
+
+Route::get('/cv', [Controllers\CvEntryController::class, 'index'])->name('cv');
 Route::get('/cvAdd', [Controllers\CvEntryController::class, 'create'])->name('cvAdd');
 Route::post('/cvAdd', [Controllers\CvEntryController::class, 'store']);
+
+// fix it
+Route::get('/contact', [Controllers\HomeController::class, 'index'])->name('contact');
