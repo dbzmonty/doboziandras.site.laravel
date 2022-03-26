@@ -1,6 +1,13 @@
 @extends('layouts.main')
 
 @section('content')
+
+<div class="row">
+    <div class="col-lg-12 mb-12">        
+        <h1><a class="btn btn-secondary" href="{{ route('postCreate') }}">Add</a></h1>
+    </div>    
+</div>
+
 <div class="row">
     <div class="col-md-8 col-lg-6 mx-auto">
         @foreach($posts as $post)
@@ -13,7 +20,7 @@
                         <div>
                             {{ $post->created_at->diffForHumans() }}
                         </div>
-                        <p class="fw-bold">
+                        <p class="font-weight-bold">
                             {{ $post->description }}
                         </p>
                         <p class="text-end">
