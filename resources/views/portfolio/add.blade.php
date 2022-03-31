@@ -12,14 +12,16 @@
 @endpush
 
 @section('content')
-<div class="row">
-    <div class="col-lg-6 col-md-10 mx-auto">
-        <div class="card">
-            <div class="card-body">
-                <h3 class="display-3">{{ __('Publish') }}</h3>    
-
-                <form action="{{ route('postCreate') }}" method="POST">
-                    @csrf
+<form action="{{ route('portfolio.add') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="d-flex align-items-center mb-3">
+        <h3 class="display-3">{{ __('Publish') }}</h3>
+        <button class="ms-auto btn btn-secondary">Publish</button>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-6">
+            <div class="card">
+                <div class="card-body">
                     <div class="mb-3">
                         <label for="title">{{ __('Title') }}</label>
                         <input class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" type="text" value="{{ old('title') }}" name="title" id="title">
@@ -40,13 +42,23 @@
                         @if ($errors->has('content'))                            
                             <p class="invalid-feedback">{{ $errors->first('content') }}</p>
                         @endif
+                    </div>                    
+                </div>            
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+            <div class="card">
+                <div class="card-body">                    
+                    <div class="mb-3">
+                        <label for="cover">{{ __('Cover image (jpg, jpeg, bmp, png)') }}</label>
+                        <input class="form-control{{ $errors->has('cover') ? ' is-invalid' : '' }}" type="file" name="cover" value="{{ old('cover') }}">
+                        @if ($errors->has('cover'))
+                            <p class="invalid-feedback">{{ $errors->first('cover') }}</p>
+                        @endif
                     </div>
-                    <div class="d-grid">
-                        <button class="btn btn-secondary btn-lg">Publish</button>
-                    </div>
-                </form>
-            </div>            
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</form>
 @endsection

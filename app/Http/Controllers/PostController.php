@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class PostController extends Controller
 {
@@ -11,44 +12,53 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->paginate(4);
-        return view('portfolio')->with(compact('posts'));
+        return view('portfolio.list')->with(compact('posts'));
     }
 
     // Post hozzáadás űrlap
     public function create()
     {
-        return view('postCreate');
+        return view('portfolio.add');
     }
 
     // Post mentése
     public function store(Request $request)
     {
         // tiltani a scriptet
-
         $request->validate([                    
             'title' => 'required|min:3|max:240',
             'description' => 'required|min:3|max:240',
-            'content' => 'required|min:3'
+            'content' => 'required|min:3',
+            'cover' => 'file|mimes:jpg,jpeg,bmp,png'
         ]);
+
+        $cover = $this->uploadImage($request);
 
         $post = new Post();
         $post->title = $request->title;
         $post->description = $request->description;
         $post->content = $request->content;
+        if ($cover) { $post->cover = $cover->basename; }
         $post->save();
 
         return redirect()
-            ->route('postDetails', $post)
+            ->route('portfolio.details', $post)
             ->with('success', __('Post published successfully'));
     }
 
     // Post megnyitása
     public function show(Post $post)
     {
-        return view('postDetails')->with(compact('post'));
+        return view('portfolio.details')->with(compact('post'));
     }
 
-
+    private function uploadImage(Request $request)
+    {
+        $file = $request->file('cover');        
+        $fileName = uniqid();
+        $cover = Image::make($file)->save(public_path("uploads/{$fileName}.{$file->extension()}"));
+        return $cover;
+    }
 
 
 

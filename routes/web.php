@@ -3,28 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/portfolio', [Controllers\PostController::class, 'index'])->name('portfolio');
+Route::get('/portfolio', [Controllers\PostController::class, 'index'])->name('portfolio.list');
 
-Route::get('/publish', [Controllers\PostController::class, 'create'])->name('postCreate');
+Route::get('/publish', [Controllers\PostController::class, 'create'])->name('portfolio.add');
 Route::post('/publish', [Controllers\PostController::class, 'store']);
 
-Route::get('/post/{post}', [Controllers\PostController::class, 'show'])->name('postDetails');
+Route::get('/post/{post}', [Controllers\PostController::class, 'show'])->name('portfolio.details');
 
-Route::get('/cv', [Controllers\CvEntryController::class, 'index'])->name('cv');
-Route::get('/cvAdd', [Controllers\CvEntryController::class, 'create'])->name('cvAdd');
+Route::get('/cv', [Controllers\CvEntryController::class, 'index'])->name('cv.list');
+Route::get('/cvAdd', [Controllers\CvEntryController::class, 'create'])->name('cv.add');
 Route::post('/cvAdd', [Controllers\CvEntryController::class, 'store']);
 
 // fix it

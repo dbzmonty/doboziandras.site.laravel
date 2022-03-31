@@ -12,4 +12,21 @@ class Post extends Model
     protected $fillable = [
         'title', 'description', 'content'
     ];
+
+    public function getHasCoverAttribute()
+    {
+        return $this->cover != null;
+    }
+
+    public function getCoverImageAttribute()
+    {
+        if ($this->has_cover)
+        {
+            return asset("uploads/{$this->cover}");
+        }
+        else
+        {
+            return "https://via.placeholder.com/350";
+        }
+    }
 }

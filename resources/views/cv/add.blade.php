@@ -7,7 +7,7 @@
             <div class="card-body">
                 <h5 class="display-5">{{ __('Add a CV entry') }}</h5>
                 
-                <form action="{{ route('cvAdd') }}" method="POST">                    
+                <form action="{{ route('cv.add') }}" method="POST">
                     @csrf    
                     <div class="mb-3">
                         <label for="category_id">{{ __('Category') }}</label>

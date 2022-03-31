@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-lg-12 mb-12">        
-        <h1><a class="btn btn-secondary" href="{{ route('cvAdd') }}">Add</a></h1>
+        <h1><a class="btn btn-secondary" href="{{ route('cv.add') }}">Add</a></h1>
     </div>    
 </div>
 

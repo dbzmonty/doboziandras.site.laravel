@@ -14,7 +14,7 @@ class CvEntryController extends Controller
         $workexperiences = CvEntry::where('category_id', 2)->orderByDesc('year_to')->get();
         $courses = CvEntry::where('category_id', 3)->orderBy('title')->get();
 
-        return view('cv')->with([
+        return view('cv.list')->with([
             'qualifications' => $qualifications,
             'workexperiences' => $workexperiences,
             'courses' => $courses
@@ -25,7 +25,7 @@ class CvEntryController extends Controller
     {
         $categories = CvCategory::orderBy('id')->get();
 
-        return view('cvAdd')->with(['categories' => $categories]);
+        return view('cv.add')->with(['categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -68,7 +68,7 @@ class CvEntryController extends Controller
             $cventry->save();
         }
 
-        return redirect()->route('cv');
+        return redirect()->route('cv.list');
     }
 
 
