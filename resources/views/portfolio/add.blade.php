@@ -22,40 +22,16 @@
         <div class="col-lg-8 col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label for="title">{{ __('Title') }}</label>
-                        <input class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" type="text" value="{{ old('title') }}" name="title" id="title">
-                        @if ($errors->has('title'))                            
-                            <p class="invalid-feedback">{{ $errors->first('title') }}</p>
-                        @endif
-                    </div>
-                    <div class="mb-3">
-                        <label for="description">{{ __('Description') }}</label>
-                        <input class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" type="text" value="{{ old('description') }}" name="description" id="description">
-                        @if ($errors->has('description'))                            
-                            <p class="invalid-feedback">{{ $errors->first('description') }}</p>
-                        @endif
-                    </div>
-                    <div class="mb-3">
-                        <label for="content">{{ __('Content') }}</label>
-                        <textarea class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" name="content" id="content">{{ old('content') }}</textarea>
-                        @if ($errors->has('content'))                            
-                            <p class="invalid-feedback">{{ $errors->first('content') }}</p>
-                        @endif
-                    </div>                    
+                    <x-forms.input name="title" label="{{ __('Title') }}" />
+                    <x-forms.input name="description" label="{{ __('Description') }}" />
+                    <x-forms.input name="content" label="{{ __('Content') }}" />
                 </div>            
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-12">
             <div class="card">
-                <div class="card-body">                    
-                    <div class="mb-3">
-                        <label for="cover">{{ __('Cover image (jpg, jpeg, bmp, png)') }}</label>
-                        <input class="form-control{{ $errors->has('cover') ? ' is-invalid' : '' }}" type="file" name="cover" value="{{ old('cover') }}">
-                        @if ($errors->has('cover'))
-                            <p class="invalid-feedback">{{ $errors->first('cover') }}</p>
-                        @endif
-                    </div>
+                <div class="card-body">
+                    <x-forms.input name="cover" label="{{ __('Cover image (jpg, jpeg, bmp, png)') }}" type="file" />
                 </div>
             </div>
         </div>

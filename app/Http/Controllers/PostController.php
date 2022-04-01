@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -22,23 +23,21 @@ class PostController extends Controller
     }
 
     // Post mentése
-    public function store(Request $request)
+    // PostRequest validálja a formot
+    public function store(PostRequest $request)
     {
-        // tiltani a scriptet
-        $request->validate([                    
-            'title' => 'required|min:3|max:240',
-            'description' => 'required|min:3|max:240',
-            'content' => 'required|min:3',
-            'cover' => 'file|mimes:jpg,jpeg,bmp,png'
-        ]);
-
-        $cover = $this->uploadImage($request);
-
         $post = new Post();
         $post->title = $request->title;
         $post->description = $request->description;
         $post->content = $request->content;
-        if ($cover) { $post->cover = $cover->basename; }
+        
+        // Ha van kép, akkor mentsük el
+        if ($request->file('cover'))
+        {
+            $cover = $this->uploadImage($request);
+            $post->cover = $cover->basename;
+        }   
+                
         $post->save();
 
         return redirect()
@@ -59,6 +58,7 @@ class PostController extends Controller
         $cover = Image::make($file)->save(public_path("uploads/{$fileName}.{$file->extension()}"));
         return $cover;
     }
+
 
 
 

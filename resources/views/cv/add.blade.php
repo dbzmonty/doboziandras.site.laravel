@@ -22,7 +22,8 @@
                         @if ($errors->has('category_id'))                            
                             <p class="invalid-feedback">{{ str_contains($errors->first('category_id'), 'required') ? 'Please choose a category.' : $errors->first('category_id') }}</p>
                         @endif
-                    </div>                
+                    </div>
+                    
                     <div class="mb-3">
                         <label for="title" id="lblTitle">{{ __('Title') }}</label>
                         <input class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" type="text" name="title" value="{{ old('title') }}">
