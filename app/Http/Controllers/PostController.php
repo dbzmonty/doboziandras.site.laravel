@@ -34,10 +34,9 @@ class PostController extends Controller
         // Ha van kép, akkor mentsük el
         if ($request->file('cover'))
         {
-            $cover = $this->uploadImage($request);
+            $cover = ImageController::uploadImage($request);
             $post->cover = $cover->basename;
         }   
-                
         $post->save();
 
         return redirect()
@@ -51,14 +50,7 @@ class PostController extends Controller
         return view('portfolio.details')->with(compact('post'));
     }
 
-    private function uploadImage(Request $request)
-    {
-        $file = $request->file('cover');        
-        $fileName = uniqid();
-        $cover = Image::make($file)->save(public_path("uploads/{$fileName}.{$file->extension()}"));
-        return $cover;
-    }
-
+    
 
 
 

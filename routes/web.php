@@ -9,6 +9,7 @@ Route::get('/portfolio', [Controllers\PostController::class, 'index'])->name('po
 
 Route::get('/publish', [Controllers\PostController::class, 'create'])->name('portfolio.add');
 Route::post('/publish', [Controllers\PostController::class, 'store']);
+Route::post('/imageUpload', [Controllers\ImageController::class, 'store'])->name('imageUpload');
 
 Route::get('/post/{post}', [Controllers\PostController::class, 'show'])->name('portfolio.details');
 

@@ -9,7 +9,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8 col-lg-6 mx-auto">
+    <div class="col-md-6 col-lg-10 mx-auto">
         @foreach($posts as $post)
             @include('portfolio._item')
         @endforeach

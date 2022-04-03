@@ -8,6 +8,10 @@ body {
     background-repeat: repeat;
 }
 
+img {    
+    max-width: 100%;
+}
+
 .card {
     background-color: lightgray;
 }

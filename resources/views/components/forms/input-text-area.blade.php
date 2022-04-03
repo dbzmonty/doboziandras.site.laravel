@@ -4,14 +4,14 @@
             {{ $label }}
         </label>
     @endif
-    <input
+    <textarea
         class="form-control{{ $errors->has($name) ? ' is-invalid' : '' }}"
-        type="{{ $type }}"
         name="{{ $name }}"
-        value="{{ old($name, $value) }}"
         {{ $attributes }}
     >
-    @if ($errors->has($name))
+        {{ old($name, $value) }}
+    </textarea>
+    @if ($errors->has($name))                            
         <p class="invalid-feedback">
             {{ $errors->first($name) }}
         </p>

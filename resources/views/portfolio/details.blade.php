@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1 class="display-1">{{ $post->title }}</h1>
+    <h3 class="display-3">{{ $post->title }}</h3>
     <hr />
     <p>{{ $post->created_at->diffForHumans() }}</p>
     <hr />
