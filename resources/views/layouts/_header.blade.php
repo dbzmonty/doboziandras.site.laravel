@@ -32,6 +32,41 @@
                         <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                       </svg> Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link">  |  </a>
+                </li>
+                @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" 
+                            data-toggle="dropdown" 
+                            href="#" 
+                            role="button" 
+                            aria-haspopup="true" 
+                            aria-expanded="false"
+                            >
+                                {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">{{ __('Profile') }}</a>
+                            <a class="dropdown-item" href="{{ route('portfolio.add') }}">{{ __('Add portfolio item') }}</a>
+                            <a class="dropdown-item" href="{{ route('cv.add') }}">{{ __('Add CV item') }}</a>
+                            <div class="dropdown-divider"></div>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="dropdown-item" type="submit">
+                                    {{ __('Logout') }}
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Sign up') }}</a>
+                    </li>    
+                @endauth                
             </ul>
         </div>
     </div>

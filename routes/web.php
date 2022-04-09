@@ -7,8 +7,11 @@ Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/portfolio', [Controllers\PostController::class, 'index'])->name('portfolio.list');
 
-Route::get('/publish', [Controllers\PostController::class, 'create'])->name('portfolio.add');
-Route::post('/publish', [Controllers\PostController::class, 'store']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/publish', [Controllers\PostController::class, 'create'])->name('portfolio.add');
+    Route::post('/publish', [Controllers\PostController::class, 'store']);
+});
+
 Route::post('/imageUpload', [Controllers\ImageController::class, 'store'])->name('imageUpload');
 
 Route::get('/post/{post}', [Controllers\PostController::class, 'show'])->name('portfolio.details');
@@ -19,3 +22,5 @@ Route::post('/cvAdd', [Controllers\CvEntryController::class, 'store']);
 
 // fix it
 Route::get('/contact', [Controllers\HomeController::class, 'index'])->name('contact');
+
+require __DIR__.'/auth.php';
