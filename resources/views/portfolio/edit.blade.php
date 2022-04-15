@@ -86,19 +86,19 @@
 @endpush
 
 @section('content')
-<form action="{{ route('portfolio.add') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('portfolio.edit', $post) }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="d-flex align-items-center mb-3">
-        <h3 class="display-3">{{ __('Publish') }}</h3>
-        <button class="ms-auto btn btn-secondary">Publish</button>
+        <h3 class="display-3">{{ __('Editing') }} {{ $post->title }}</h3>
+        <button class="ms-auto btn btn-secondary">Save</button>
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <x-forms.input name="title" label="{{ __('Title') }}" />
-                    <x-forms.input name="description" label="{{ __('Description') }}" />
-                    <x-forms.input-text-area name="content" label="{{ __('Content') }}" id="content" />
+                    <x-forms.input name="title" label="{{ __('Title') }}" :value="$post->title" />
+                    <x-forms.input name="description" label="{{ __('Description') }}" :value="$post->description" />
+                    <x-forms.input-text-area name="content" label="{{ __('Content') }}" id="content" :value="$post->content" />
                 </div>
             </div>
         </div>

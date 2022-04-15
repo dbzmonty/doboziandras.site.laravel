@@ -5,22 +5,29 @@ use App\Http\Controllers;
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 
+// megjelenítések
 Route::get('/portfolio', [Controllers\PostController::class, 'index'])->name('portfolio.list');
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/publish', [Controllers\PostController::class, 'create'])->name('portfolio.add');
-    Route::post('/publish', [Controllers\PostController::class, 'store']);
-});
-
-Route::post('/imageUpload', [Controllers\ImageController::class, 'store'])->name('imageUpload');
-
-Route::get('/post/{post}', [Controllers\PostController::class, 'show'])->name('portfolio.details');
-
 Route::get('/cv', [Controllers\CvEntryController::class, 'index'])->name('cv.list');
-Route::get('/cvAdd', [Controllers\CvEntryController::class, 'create'])->name('cv.add');
-Route::post('/cvAdd', [Controllers\CvEntryController::class, 'store']);
-
+Route::get('/post/{post}', [Controllers\PostController::class, 'show'])->name('portfolio.details');
 // fix it
 Route::get('/contact', [Controllers\HomeController::class, 'index'])->name('contact');
+
+// loginhoz kötöttek
+Route::middleware(['auth'])->group(function () {
+    // képfeltöltéshez
+    Route::post('/imageUpload', [Controllers\ImageController::class, 'store'])->name('imageUpload');
+    
+    // publikálni egy bejegyzést
+    Route::get('/publish', [Controllers\PostController::class, 'create'])->name('portfolio.add');
+    Route::post('/publish', [Controllers\PostController::class, 'store']);
+
+    // módosítani egy bejegyzést
+    Route::get('/post/{post}/edit', [Controllers\PostController::class, 'edit'])->name('portfolio.edit');
+    Route::post('/post/{post}/edit', [Controllers\PostController::class, 'update']);
+
+    // publikálni egy cv elemet
+    Route::get('/cvAdd', [Controllers\CvEntryController::class, 'create'])->name('cv.add');
+    Route::post('/cvAdd', [Controllers\CvEntryController::class, 'store']);    
+});
 
 require __DIR__.'/auth.php';

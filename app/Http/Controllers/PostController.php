@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
@@ -50,39 +49,37 @@ class PostController extends Controller
         return view('portfolio.details')->with(compact('post'));
     }
 
-    
-
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+    // Post módosítás űrlap
     public function edit(Post $post)
     {
-        //
+        return view('portfolio.edit')->with(compact('post'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
+    // Post módosításának mentése
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        $post->update($request->except('_token'));
+        
+        // Ha van kép, akkor mentsük el
+        if ($request->file('cover'))
+        {
+            $cover = ImageController::uploadImage($request);
+            $post->cover = $cover->basename;
+        }
+        // Ha nincs most, de volt, akkor töröljük
+        else if ($post->cover)
+        {
+            ImageController::deleteImage($post->cover);
+            $post->cover = null;
+        }
+        $post->save();
+
+        return redirect()
+            ->route('portfolio.details', $post)
+            ->with('success', __('Post edited successfully'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+    //
     public function destroy(Post $post)
     {
         //

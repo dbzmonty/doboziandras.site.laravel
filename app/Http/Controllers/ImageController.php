@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\File;
 
 class ImageController extends Controller
 {
@@ -26,5 +27,15 @@ class ImageController extends Controller
         $fileName = uniqid();
         $cover = Image::make($file)->save(public_path("uploads/{$fileName}.{$file->extension()}"));
         return $cover;
+    }
+
+    public static function deleteImage($fileName)
+    {
+        $file = public_path("uploads/{$fileName}");
+
+        if (File::exists($file))
+        {
+            File::delete($file);
+        }
     }
 }
