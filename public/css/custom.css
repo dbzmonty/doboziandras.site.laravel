@@ -16,6 +16,31 @@ img {
     background-color: lightgray;    
 }
 
+.portfolio-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+}
+
+.portfolio-img-pointer:hover {
+    cursor: pointer;    
+    opacity: 0.7;
+}
+
+.portfolio-img-caption {
+    text-align: center;
+    font-weight:300;
+    position: relative;
+    top: -20px;
+    background-color: lightgray;    
+}
+
 .portfolio-youtube {
     text-align: center;
     margin: 20px;

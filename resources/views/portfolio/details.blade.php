@@ -2,6 +2,7 @@
 
 @section('content')
     <h3 class="display-3">{{ $post->title }}</h3>
+    <a class="btn btn-secondary mt-2 mb-2" href="{{ route('portfolio.edit', $post) }}">Edit</a>
     <hr />
     <p>{{ $post->created_at->diffForHumans() }}</p>
     <hr />
@@ -28,12 +29,20 @@
             </form>
             <div class="mt-5">
                 @foreach($post->comments as $comment)
-                <div class="card mb-3">
+                <div class="card mb-3" id="comment-{{$comment->id}}">
                     <div class="card-body">
-                        <div class="mb-3 d-flex">
+                        <div class="mb-3 d-flex my-auto">
                             <div class="d-flex font-weight-bold">
-                                {{ $comment->user->name . " | " . $comment->created_at->diffForHumans() }}
+                                <a href="{{ route('profile.show', $comment->user) }}" class="mr-2">
+                                    <img class="rounded-circle me-2" width="25" src="{{ $comment->user->avatar }}" alt="{{ $comment->user->name }}">
+                                </a>
+                                <a href="{{ route('profile.show', $comment->user) }}">
+                                    {{ $comment->user->name }}
+                                </a>
                             </div>
+                            <span class="ml-3">
+                                {{ $comment->created_at->diffForHumans() }}
+                            </span>
                         </div>
                         <div style="white-space: pre-line;">
                             {{ $comment->message }}    

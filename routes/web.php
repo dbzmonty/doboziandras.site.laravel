@@ -10,6 +10,7 @@ Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/portfolio', [Controllers\PostController::class, 'index'])->name('portfolio.list');
 Route::get('/cv', [Controllers\CvEntryController::class, 'index'])->name('cv.list');
 Route::get('/post/{post}', [Controllers\PostController::class, 'show'])->name('portfolio.details');
+Route::get('/profile/{user}', [Controllers\ProfileController::class, 'show'])->name('profile.show');
 // fix it
 Route::get('/contact', [Controllers\HomeController::class, 'index'])->name('contact');
 

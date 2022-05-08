@@ -11,7 +11,7 @@
                         <x-forms.input name="email" type="email" label="{{ __('Email address') }}" />
                         <x-forms.input name="password" type="password" label="{{ __('Password') }}" />
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" value="1">
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember" value="1" disabled>
                             <label class="form-check-label" for="remember">
                                 {{ __('Remember me') }}
                             </label>

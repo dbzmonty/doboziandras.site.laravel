@@ -44,10 +44,11 @@
                             aria-haspopup="true" 
                             aria-expanded="false"
                             >
-                                {{ Auth::user()->name }}
+                            <img class="rounded-circle me-2" width="25" src="{{ Auth::user()->avatar }}" />    
+                            {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">{{ __('Profile') }}</a>
+                            <a class="dropdown-item" href="{{ route('profile.show', Auth::user()->id) }}">{{ __('Profile') }}</a>
                             <a class="dropdown-item" href="{{ route('portfolio.add') }}">{{ __('Add portfolio item') }}</a>
                             <a class="dropdown-item" href="{{ route('cv.add') }}">{{ __('Add CV item') }}</a>
                             <div class="dropdown-divider"></div>

@@ -88,9 +88,9 @@
 @section('content')
 <form action="{{ route('portfolio.edit', $post) }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="d-flex align-items-center mb-3">
+    <div>
         <h3 class="display-3">{{ __('Editing') }} {{ $post->title }}</h3>
-        <button class="ms-auto btn btn-secondary">Save</button>
+        <button class="btn btn-secondary mb-4">Save</button>  
     </div>
     <div class="row">
         <div class="col-lg-8 col-md-6">
