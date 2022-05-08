@@ -11,8 +11,7 @@ Route::get('/portfolio', [Controllers\PostController::class, 'index'])->name('po
 Route::get('/cv', [Controllers\CvEntryController::class, 'index'])->name('cv.list');
 Route::get('/post/{post}', [Controllers\PostController::class, 'show'])->name('portfolio.details');
 Route::get('/profile/{user}', [Controllers\ProfileController::class, 'show'])->name('profile.show');
-// fix it
-Route::get('/contact', [Controllers\HomeController::class, 'index'])->name('contact');
+Route::get('/contact', [Controllers\ContactController::class, 'index'])->name('contact.show');
 
 // loginhoz kötöttek
 Route::middleware(['auth'])->group(function () {
