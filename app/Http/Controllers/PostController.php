@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 
@@ -83,5 +84,22 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function comment(Post $post, Request $request)
+    {
+        $request->validate([
+            'comment' => 'required|min:10'
+        ]);
+        
+        $comment = new Comment();
+        $comment->message = $request->comment;
+        $comment->user()->associate($request->user());
+
+        $post->comments()->save($comment);
+        $url = route('portfolio.details', $post) . "#comment-{$comment->id}";
+
+        return redirect($url)
+            ->with('success', __('Comment saved successfully'));
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use App\Http\Controllers\Controller;
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 
@@ -25,9 +26,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/post/{post}/edit', [Controllers\PostController::class, 'edit'])->name('portfolio.edit');
     Route::post('/post/{post}/edit', [Controllers\PostController::class, 'update']);
 
+    // publikálni egy kommentet
+    Route::post('/post/{post}/comment', [Controllers\PostController::class, 'comment'])->name('portfolio.comment');
+
     // publikálni egy cv elemet
     Route::get('/cvAdd', [Controllers\CvEntryController::class, 'create'])->name('cv.add');
-    Route::post('/cvAdd', [Controllers\CvEntryController::class, 'store']);    
+    Route::post('/cvAdd', [Controllers\CvEntryController::class, 'store']);
 });
 
 require __DIR__.'/auth.php';

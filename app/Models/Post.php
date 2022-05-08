@@ -29,4 +29,9 @@ class Post extends Model
             return "https://via.placeholder.com/350";
         }
     }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->orderBy('created_at', 'desc');
+    }
 }
