@@ -2,7 +2,7 @@
 
 @section('content')
     <h3 class="display-3">{{ $post->title }}</h3>
-    @if (Auth::user()->isadmin)
+    @if ((!is_null(Auth::user())) && Auth::user()->isadmin)
         <a class="btn btn-secondary mt-2 mb-2" href="{{ route('portfolio.edit', $post) }}">Edit</a>
     @endif
     <hr />
@@ -17,7 +17,7 @@
         <div class="col-md-8 col-lg-6 mx-auto">
             <h5 class="display-5">
                 {{ __('Comments') }}
-            </h5>
+            </h5>               
             <form action="{{ route('portfolio.comment', $post) }}" method="POST">
                 @csrf
                 <div class="mb-3">
