@@ -86,6 +86,11 @@
 @endpush
 
 @section('content')
+@if (!Auth::user()->isadmin)
+    <script>    
+        window.location.href = '{{ route("home") }}';
+    </script>
+@endif
 <form action="{{ route('portfolio.add') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="d-flex align-items-center mb-3">

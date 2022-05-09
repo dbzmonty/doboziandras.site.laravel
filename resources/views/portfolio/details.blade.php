@@ -2,7 +2,9 @@
 
 @section('content')
     <h3 class="display-3">{{ $post->title }}</h3>
-    <a class="btn btn-secondary mt-2 mb-2" href="{{ route('portfolio.edit', $post) }}">Edit</a>
+    @if (Auth::user()->isadmin)
+        <a class="btn btn-secondary mt-2 mb-2" href="{{ route('portfolio.edit', $post) }}">Edit</a>
+    @endif
     <hr />
     <p>{{ $post->created_at->diffForHumans() }}</p>
     <hr />

@@ -45,12 +45,14 @@
                             aria-expanded="false"
                             >
                             <img class="rounded-circle me-2" width="25" src="{{ Auth::user()->avatar }}" />    
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->name }}                            
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('profile.show', Auth::user()->id) }}">{{ __('Profile') }}</a>
-                            <a class="dropdown-item" href="{{ route('portfolio.add') }}">{{ __('Add portfolio item') }}</a>
-                            <a class="dropdown-item" href="{{ route('cv.add') }}">{{ __('Add CV item') }}</a>
+                            @if (Auth::user()->isadmin)
+                                <a class="dropdown-item" href="{{ route('portfolio.add') }}">{{ __('Add portfolio item') }}</a>
+                                <a class="dropdown-item" href="{{ route('cv.add') }}">{{ __('Add CV item') }}</a>
+                            @endif
                             <div class="dropdown-divider"></div>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
